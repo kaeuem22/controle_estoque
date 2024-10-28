@@ -59,7 +59,7 @@ public class Program {
 
             rs = st.executeQuery("select * from produto where id =" + id_sc + "");
             while (rs.next()) {
-                System.out.printf("Id: %d , Nome: %s, Preco: %.2f\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"));
+                System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Qantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
             }
         }
         catch (SQLException e){
@@ -84,7 +84,7 @@ public class Program {
 
             rs = st.executeQuery("select * from produto");
             while (rs.next()) {
-                System.out.printf("Id: %d , Nome: %s, Preco: %.2f\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"));
+                System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Qantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
             }
         }
         catch (SQLException e){
@@ -106,9 +106,9 @@ public class Program {
 
             st = conn.prepareStatement(
                     "INSERT INTO produto"
-                            + "(Nome, Preco)"
+                            + "(Nome, Preco, Quantidade)"
                             + "VALUES"
-                            + "(?,?)",
+                            + "(?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
 
@@ -119,9 +119,13 @@ public class Program {
             System.out.print("Insira o valor do produto (sem 'R$'): ");
             double preco_sc = sc.nextDouble();
 
+            System.out.print("Insira a quantidade inicial: ");
+            int quantidade_sc = sc.nextInt();
+
 
             st.setString(1, nome_sc);
             st.setDouble(2, preco_sc);
+            st.setInt(3, quantidade_sc);
 
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
@@ -131,7 +135,7 @@ public class Program {
                     System.out.println("Done! id = " + id);
                     rs = st.executeQuery("select * from produto where id =" + id + "");
                     while (rs.next()) {
-                        System.out.printf("Id: %d , Nome: %s, Preco: %.2f\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"));
+                        System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Qantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
                     }
                 }
             } else {
