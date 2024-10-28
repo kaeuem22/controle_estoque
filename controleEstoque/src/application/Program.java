@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 
 public class Program {
-    static Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+    static Scanner sc = new Scanner(System.in).useLocale(new Locale("pt","BR"));
+    static Connection conn = null;
 
     public static void main(String[] args) {
 
@@ -42,10 +43,11 @@ public class Program {
     }
 
         sc.close();
+        DB.closeConenction();
     }
 
     private static void readSpecificItem() {
-        Connection conn = null;
+
 
         Statement st = null;
         ResultSet rs = null;
@@ -59,7 +61,7 @@ public class Program {
 
             rs = st.executeQuery("select * from produto where id =" + id_sc + "");
             while (rs.next()) {
-                System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Qantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
+                System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Quantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
             }
         }
         catch (SQLException e){
@@ -68,12 +70,10 @@ public class Program {
         finally {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
-            DB.closeConenction();
         }
     }
 
     private static void readItem() {
-        Connection conn = null;
 
         Statement st = null;
         ResultSet rs = null;
@@ -93,13 +93,11 @@ public class Program {
         finally {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
-            DB.closeConenction();
         }
     }
 
     private static void createItem() {
         sc.nextLine();
-        Connection conn = null;
         PreparedStatement st = null;
         try {
             conn = DB.getConnection();
@@ -150,7 +148,6 @@ public class Program {
         }*/
         finally {
             DB.closeStatement(st);
-            DB.closeConenction();
         }
     }
 }
