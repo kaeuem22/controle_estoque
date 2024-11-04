@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 
-public class Program {
+public class Queries {
     static Scanner sc = new Scanner(System.in).useLocale(new Locale("pt","BR"));
     static Connection conn = null;
 
@@ -32,10 +32,10 @@ public class Program {
                 createItem();
                 break;
             case 2:
-                readItem();
+                queryItem();
                 break;
             case 3:
-                readSpecificItem();
+                querySpecificItem(1);
                 break;
             default:
             break;
@@ -46,7 +46,7 @@ public class Program {
         DB.closeConenction();
     }
 
-    public static void readSpecificItem() {
+    public static Object querySpecificItem(int id) {
 
 
         Statement st = null;
@@ -56,12 +56,12 @@ public class Program {
 
             st = conn.createStatement();
 
-            System.out.print("Insira o Id: ");
-            int id_sc = sc.nextInt();
+            //System.out.print("Insira o Id: ");
+            //int id_sc = sc.nextInt();
 
-            rs = st.executeQuery("select * from produto where id =" + id_sc + "");
+            rs = st.executeQuery("select * from produto where id =" + id);
             while (rs.next()) {
-                System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Quantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
+                return String.format("Id: %d\n Nome: %s\n Preco: R$ %.2f\n Quantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
             }
         }
         catch (SQLException e){
@@ -71,9 +71,10 @@ public class Program {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return null;
     }
 
-    private static void readItem() {
+    public static String queryItem() {
 
         Statement st = null;
         ResultSet rs = null;
@@ -84,7 +85,7 @@ public class Program {
 
             rs = st.executeQuery("select * from produto");
             while (rs.next()) {
-                System.out.printf("Id: %d - Nome: %s - Preco: %.2f - Qantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
+                return String.format("Id: %d - Nome: %s - Preco: %.2f - Qantidade: %d\n", rs.getInt("Id"), rs.getString("Nome"), rs.getDouble("Preco"), rs.getInt("Quantidade"));
             }
         }
         catch (SQLException e){
@@ -94,6 +95,7 @@ public class Program {
             DB.closeResultSet(rs);
             DB.closeStatement(st);
         }
+        return null;
     }
 
     private static void createItem() {
