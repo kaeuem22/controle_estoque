@@ -75,7 +75,7 @@ public class ControleController {
             ResultSet rs = null;
             try {
 
-                // gera tabla
+                // INICIO teste para inserir na tabela <<---------------
                 TableView tab = new TableView();
 
                 TableColumn idColumn = new TableColumn("ID");
@@ -121,6 +121,8 @@ public class ControleController {
                         return Quantidade;
                     }
                 }
+
+                // FIM teste para inserir na tabela <<---------------
                 conn = DB.getConnection();
 
                 String sql = STR."SELECT * FROM produto WHERE Nome LIKE '%\{nome}%'";
@@ -134,8 +136,10 @@ public class ControleController {
                     System.out.printf(STR."Preço \{rs.getDouble("Preco")}\n");//devolve o preço do produto
                     System.out.printf(STR."Quantidade \{rs.getInt("Quantidade")}\n");//devolve o quantidade do produto
 
+                    // INICIO teste para inserir na tabela <<---------------
                     Produto produto = new Produto(rs.getInt("Id"), rs.getString("Nome"),rs.getDouble("Preco"),rs.getInt("Quantidade"));
                     tab.getItems().add(produto);
+                    // FIM teste para inserir na tabela <<---------------
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
