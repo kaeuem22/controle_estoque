@@ -11,3 +11,4 @@ com\controleEstoque\MainApp.class
 com\controleEstoque\controller\AtualizarController.class
 com\controleEstoque\model\Produto.class
 com\controleEstoque\controller\HistoricoController.class
+com\controleEstoque\model\Historico.class

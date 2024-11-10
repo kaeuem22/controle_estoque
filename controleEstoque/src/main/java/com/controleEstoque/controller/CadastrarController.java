@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.controleEstoque.model.Historico.createHistorico;
+
 public class CadastrarController {
 
     @FXML
@@ -86,6 +88,7 @@ public class CadastrarController {
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
+                    createHistorico(nome, preco, quantidade);
                     System.out.println("Produto cadastrado com sucesso! ID = " + id);
                     // Usar Alert para notificar o usuário
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Produto cadastrado com sucesso! ID = " + id);
