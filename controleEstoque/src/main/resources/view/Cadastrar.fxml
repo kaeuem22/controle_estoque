@@ -41,7 +41,7 @@
                                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
                                     </textFill>
                                 </Label>
-                                <Separator layoutX="-1.0" layoutY="232.0" prefHeight="22.0" prefWidth="864.0" />
+                                <Separator layoutY="262.0" prefHeight="22.0" prefWidth="864.0" />
                                 <Label layoutX="21.0" layoutY="51.0" text="Entrada de estoque:" />
                                 <Label layoutX="19.0" layoutY="153.0" text="Quantidade: " />
 
