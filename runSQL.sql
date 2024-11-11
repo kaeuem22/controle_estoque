@@ -1,3 +1,5 @@
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+
 create database controleEstoque_db;
 use controleEstoque_db;
 
@@ -15,6 +17,8 @@ CREATE TABLE historico (
   Preco double NOT NULL,
   Quantidade int NOT NULL,
   data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  Produto_id INT,
+  FOREIGN KEY (Produto_id) REFERENCES produto(id),
   PRIMARY KEY (Id)
 );
 

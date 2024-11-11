@@ -88,7 +88,7 @@ public class CadastrarController {
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    createHistorico(nome, preco, quantidade);
+                    createHistorico(nome, preco, quantidade, id);
                     System.out.println("Produto cadastrado com sucesso! ID = " + id);
                     // Usar Alert para notificar o usuário
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Produto cadastrado com sucesso! ID = " + id);
